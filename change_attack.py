@@ -44,3 +44,8 @@ else:
     cfg_file = open(cfg_path, "w")
     cfg_file.write("\n".join(splited_cmds))
     cfg_file.close()
+  
+
+from pywinauto import Application
+
+Application().start('"C:\\Program Files (x86)\Steam\\steam.exe"')
