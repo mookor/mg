@@ -2,16 +2,17 @@ import re
 from finder import get_dota_path
 import os
 import argparse
+from pywinauto import Application
 parser = argparse.ArgumentParser(description='Videos to images')
 parser.add_argument('-d',"--drive", type=str, help='disk / folder where the dota is located')
 parser.add_argument('-c',"--cfg_path", type=str, help='the path from the dota 2 beta folder to the autoexec file' , default = "game\dota\cfg\\autoexec.cfg")
 parser.add_argument('-k',"--key", type=str, help='which button to replace the attack button with' , default = "s")
-
+parser.add_argument("-st" , "--steam_path", type=str, help="path to steam.exe",default="C:\\Program Files (x86)\Steam\\steam.exe")
 args = parser.parse_args()
 dota_drive = args.drive
 dota_cfg_template_path = args.cfg_path
 key = args.key
-
+steam_path = args.steam_path
 dota_path = get_dota_path("E:")
 cfg_path = os.path.join(dota_path,dota_cfg_template_path)
 
@@ -44,8 +45,6 @@ else:
     cfg_file = open(cfg_path, "w")
     cfg_file.write("\n".join(splited_cmds))
     cfg_file.close()
-  
 
-from pywinauto import Application
 
-Application().start('"C:\\Program Files (x86)\Steam\\steam.exe"')
+Application().start(f'{steam_path}')
